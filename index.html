@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shahbaz Inviting You</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+      body {
+        background: #000;
+      }
+
+      /* Golden Card */
+
+      .luxury-card {
+        position: relative;
+        background: linear-gradient(145deg, #111, #000);
+        border: 2px solid gold;
+        border-radius: 20px;
+        color: gold;
+        overflow: hidden;
+        box-shadow: 0 0 20px gold;
+        animation: glowPulse 2s infinite alternate;
+      }
+
+      /* Glow Animation */
+
+      @keyframes glowPulse {
+        from {
+          box-shadow:
+            0 0 15px gold,
+            0 0 30px orange;
+        }
+        to {
+          box-shadow:
+            0 0 40px gold,
+            0 0 80px yellow;
+        }
+      }
+
+      /* Moving Shine Effect */
+
+      .luxury-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 215, 0, 0.6),
+          transparent
+        );
+        transform: skewX(-25deg);
+        animation: shine 3s infinite;
+      }
+
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 150%;
+        }
+      }
+
+      /* Keep content above effects */
+
+      .luxury-card > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Dust Container */
+
+      .dust-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* Single Dust Particle */
+
+      .dust {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: gold;
+        border-radius: 50%;
+        box-shadow: 0 0 8px gold;
+        opacity: 0.8;
+        animation: floatUp linear infinite;
+      }
+
+      @keyframes floatUp {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-300px);
+          opacity: 0;
+        }
+      }
+
+      /* Card Positioning */
+
+      .card-one,
+      .card-two {
+        position: absolute;
+        width: 100%;
+        transition: all 0.5s ease;
+      }
+
+      /* Visible */
+
+      .show-card {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+        z-index: 2;
+      }
+
+      /* Hidden */
+
+      .hide-card {
+        opacity: 0;
+        transform: scale(0.9);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .card-header,
+      .card-title {
+        font-family: "Great Vibes", cursive;
+        font-size: 26px;
+        text-shadow: 0 0 10px gold;
+      }
+
+      .luxury-card {
+        font-family: "Great Vibes", cursive;
+        letter-spacing: 1px;
+      }
+
+      /* Gift Box */
+
+      .gift-box {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .gift-body {
+        width: 150px;
+        height: 120px;
+        background: linear-gradient(145deg, gold, orange);
+        border-radius: 10px;
+        box-shadow: 0 0 20px gold;
+        position: relative;
+      }
+
+      .gift-lid {
+        width: 170px;
+        height: 40px;
+        background: linear-gradient(145deg, orange, gold);
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        top: 20px;
+        transition: transform 1s ease;
+      }
+
+      /* Ribbon */
+
+      .gift-body::before,
+      .gift-lid::before {
+        content: "";
+        position: absolute;
+        background: red;
+      }
+
+      .gift-body::before {
+        width: 20px;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .gift-lid::before {
+        width: 20px;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      /* Open Animation */
+
+      .open .gift-lid {
+        transform: translateY(-120px) rotate(-20deg);
+      }
+
+      .hide-gift {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .col-sm-4 {
+        height: 420px;
+      }
+
+      /* Cover Card */
+
+      .gift-cover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        cursor: pointer;
+        transition: all 0.8s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .show-cover {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .hide-cover {
+        opacity: 0;
+        transform: scale(0.8) rotateY(90deg);
+        pointer-events: none;
+      }
+
+      .ornament-svg {
+        width: 180px;
+        margin: 15px auto;
+      }
+
+      .ornament-svg svg {
+        width: 100%;
+        height: 40px;
+      }
+
+      .ornament-svg path {
+        fill: none;
+        stroke: gold;
+        stroke-width: 2;
+        filter: drop-shadow(0 0 6px gold);
+      }
+
+      /* Bottom flip */
+
+      .ornament-bottom {
+        transform: rotate(180deg);
+      }
+
+      .loader {
+        font-size: 48px;
+        font-weight: 400;
+        display: inline-block;
+        letter-spacing: 1px;
+        font-family: "Great Vibes", cursive;
+        /* font-family: Arial, Helvetica, sans-serif; */
+        color: gold;
+        box-sizing: border-box;
+        animation: spotlight 2s linear infinite alternate;
+      }
+
+      @keyframes spotlight {
+        0%,
+        20% {
+          opacity: 1;
+          letter-spacing: 2px;
+        }
+        80%,
+        100% {
+          opacity: 0;
+          letter-spacing: 32px;
+        }
+      }
+
+      .gold-glow {
+        color: #ffd700;
+        text-shadow:
+          0 0 8px #ffd700,
+          0 0 15px #ffc300,
+          0 0 30px #ffb700,
+          0 0 50px #ffa500;
+        animation: iconPulse 2s infinite alternate;
+      }
+
+      @keyframes iconPulse {
+        from {
+          text-shadow:
+            0 0 8px #ffd700,
+            0 0 15px #ffc300,
+            0 0 30px #ffb700;
+        }
+        to {
+          text-shadow:
+            0 0 20px #ffd700,
+            0 0 40px #ffc300,
+            0 0 60px #ffb700;
+        }
+      }
+
+      .fa-feather {
+        animation: floatIcon 3s ease-in-out infinite;
+      }
+
+      @keyframes floatIcon {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <body class="bg-dark">
+    <div class="container mt-5">
+      <form action="">
+        <div class="row justify-content-center">
+          <div class="col-sm-4 position-relative">
+            <!-- GIFT COVER CARD -->
+            <div
+              class="card luxury-card text-center gift-cover show-cover"
+              id="giftCover"
+            >
+              <div class="dust-container"></div>
+
+              <!-- <span class="loader">Loading</span> -->
+              <div class="ornament-svg ornament-top">
+                <i class="fa-solid fa-crown fa-2x gold-glow"></i>
+                <svg viewBox="0 0 300 60">
+                  <path
+                    d="
+M40 30
+C80 5 120 5 150 30
+C180 55 220 55 260 30
+M120 30
+Q150 10 180 30
+"
+                  />
+                </svg>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Welcome Shahbaz</h3>
+                <h3 class="card-title">A Special Gift For You</h3>
+                <p class="card-text">Click to Reveal Your Invitation</p>
+
+                <!-- <button class="btn btn-warning mt-3">Open Gift</button> -->
+              </div>
+
+              <i class="fa-solid fa-feather fa-3x gold-glow"></i>
+              <!-- <i class="fa-solid fa-feather fa-3x"></i> -->
+              <!-- <i class="fa-solid fa-dove fa-3x"></i> -->
+              <div class="ornament-svg ornament-bottom">
+                <svg viewBox="0 0 300 60">
+                  <path
+                    d="
+M40 30
+C80 5 120 5 150 30
+C180 55 220 55 260 30
+M120 30
+Q150 10 180 30
+"
+                  />
+                </svg>
+              </div>
+            </div>
+            <!-- FIRST CARD -->
+            <div class="card luxury-card text-center card-one hide-card">
+              <div class="dust-container"></div>
+
+              <div class="card-header bg-warning text-dark">
+                Exclusive Invitation
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">You Are Invited, Shahbaz</h5>
+                <p class="card-text">
+                  This is not just a card. This is your invitation to step into
+                  your next level. Success, growth and greatness are waiting
+                  inside.
+                </p>
+                <button type="button" class="btn btn-warning goInside">
+                  Enter Your Empire
+                </button>
+              </div>
+
+              <div class="card-footer text-body-light">2 days ago</div>
+            </div>
+
+            <!-- SECOND CARD -->
+            <div class="card luxury-card text-center card-two hide-card">
+              <div class="dust-container"></div>
+              <div class="card-header bg-dark">Executive Access Granted</div>
+
+              <div class="card-body">
+                <h5 class="card-title">Welcome, Future CEO</h5>
+                <p class="card-text">
+                  You didn’t come this far to stay ordinary. This is your zone
+                  of focus, discipline, and dominance. Build. Grow. Lead.
+                </p>
+                <button type="button" class="btn btn-outline-warning goBack">
+                  Continue the Journey
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    const cardOne = document.querySelector(".card-one");
+    const cardTwo = document.querySelector(".card-two");
+    const giftCover = document.getElementById("giftCover");
+
+    // Open Cover
+    giftCover.addEventListener("click", function () {
+      giftCover.classList.remove("show-cover");
+      giftCover.classList.add("hide-cover");
+
+      setTimeout(() => {
+        cardOne.classList.remove("hide-card");
+        cardOne.classList.add("show-card");
+      }, 600);
+    });
+
+    // Inside
+    document.querySelector(".goInside").addEventListener("click", function () {
+      cardOne.classList.replace("show-card", "hide-card");
+      cardTwo.classList.replace("hide-card", "show-card");
+    });
+
+    // Back
+    document.querySelector(".goBack").addEventListener("click", function () {
+      cardTwo.classList.replace("show-card", "hide-card");
+      cardOne.classList.replace("hide-card", "show-card");
+    });
+
+    // Create Golden Dust
+    // Select ALL dust containers
+    const dustContainers = document.querySelectorAll(".dust-container");
+
+    function createDust(container) {
+      const dust = document.createElement("div");
+      dust.classList.add("dust");
+
+      dust.style.left = Math.random() * 100 + "%";
+      dust.style.bottom = "0px";
+
+      const size = Math.random() * 6 + 2;
+      dust.style.width = size + "px";
+      dust.style.height = size + "px";
+
+      const duration = Math.random() * 3 + 2;
+      dust.style.animationDuration = duration + "s";
+
+      container.appendChild(dust);
+
+      setTimeout(() => {
+        dust.remove();
+      }, duration * 1000);
+    }
+
+    // Run dust for each card
+    setInterval(() => {
+      dustContainers.forEach((container) => {
+        createDust(container);
+      });
+    }, 200);
+
+    const music = document.getElementById("bgMusic");
+
+    giftCover.addEventListener("click", function () {
+      music.play();
+    });
+  </script>
+</html>
